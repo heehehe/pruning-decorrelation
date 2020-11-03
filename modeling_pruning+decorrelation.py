@@ -103,7 +103,9 @@ def main():
         best_acc1 = max(acc1_valid, best_acc1)
         if is_best:
             summary = [epoch, acc1_train, acc5_train, acc1_valid, acc5_valid]
+        print(summary)
     #         save_model(arch_name, args.dataset, state, args.save)
     #     save_summary(arch_name, args.dataset, args.save.split('.pth')[0], summary)
 
-    summary
+if __name__ == '__main__':
+    main()
