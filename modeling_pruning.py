@@ -23,9 +23,9 @@ from utils import *
 
 def main():
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    torch.manual_seed(123)
+    torch.manual_seed(777)
     if device =='cuda':
-        torch.cuda.manual_seed_all(123)
+        torch.cuda.manual_seed_all(777)
         
     ## args
     layers = 56
@@ -37,7 +37,7 @@ def main():
     lr = 0.2
     momentum = 0.9
     wd = 1e-4
-
+    print('pruning rate', prune_rate)
     cfgs = {
         '18':  (BasicBlock, [2, 2, 2, 2]),
         '34':  (BasicBlock, [3, 4, 6, 3]),
@@ -88,7 +88,7 @@ def main():
     for epoch in range(epochs):
 
         acc1_train_cor, acc5_train_cor = train(trainloader, epoch=epoch, model=model, 
-                                               prune={'type':'structured','rate':0.5}, reg=reg_cov, odecay=2,
+                                               prune={'type':prune_type,'rate':prune_rate},
                                                criterion=criterion, optimizer=optimizer, device=device)
         acc1_valid_cor, acc5_valid_cor = validate(testloader, epoch=epoch, model=model, 
                                                   criterion=criterion, device=device)
@@ -107,7 +107,7 @@ def main():
             summary = [epoch, acc1_train, acc5_train, acc1_valid, acc5_valid]
     #         save_model(arch_name, args.dataset, state, args.save)
     #     save_summary(arch_name, args.dataset, args.save.split('.pth')[0], summary)
-
+    print(summary)
 
 if __name__ == '__main__':
     main()

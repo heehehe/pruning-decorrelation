@@ -24,9 +24,9 @@ from utils import *
 
 def main():
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    torch.manual_seed(123)
+    torch.manual_seed(777)
     if device =='cuda':
-        torch.cuda.manual_seed_all(123)
+        torch.cuda.manual_seed_all(777)
     
     ## args
     layers = 56
@@ -38,6 +38,8 @@ def main():
     lr = 0.2
     momentum = 0.9
     wd = 1e-4
+    odecay = 1
+
     cfgs = {
         '18':  (BasicBlock, [2, 2, 2, 2]),
         '34':  (BasicBlock, [3, 4, 6, 3]),
@@ -85,10 +87,13 @@ def main():
     ##### main 함수 보고 train 짜기
     best_acc1 = 0.0
 
+    print('prune rate', prune_rate, 'regularization odecay', odecay)
+
     for epoch in range(epochs):
 
-        acc1_train_cor, acc5_train_cor = train(trainloader, epoch=epoch, model=model, prune={'type':'structured','rate':0.5}, 
-                                           criterion=criterion, optimizer=optimizer, reg=reg_cov, odecay=2)
+        acc1_train_cor, acc5_train_cor = train(trainloader, epoch=epoch, model=model, 
+                                            prune={'type':prune_type, 'rate':prune_rate}, 
+                                            criterion=criterion, optimizer=optimizer, reg=reg_cov, odecay=odecay)
         acc1_valid_cor, acc5_valid_cor = validate(testloader, epoch=epoch, model=model, criterion=criterion)
 
         acc1_train = round(acc1_train_cor.item(), 4)
@@ -103,7 +108,7 @@ def main():
         best_acc1 = max(acc1_valid, best_acc1)
         if is_best:
             summary = [epoch, acc1_train, acc5_train, acc1_valid, acc5_valid]
-        print(summary)
+    print(summary)
     #         save_model(arch_name, args.dataset, state, args.save)
     #     save_summary(arch_name, args.dataset, args.save.split('.pth')[0], summary)
 

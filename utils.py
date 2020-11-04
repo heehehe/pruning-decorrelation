@@ -75,7 +75,7 @@ def get_filter_mask(model, rate, prune_imp='L1'):
                 
 
     threshold = np.sort(importance_all)[int(len(importance_all) * rate)]
-    #threshold = np.percentile(importance, rate)
+    #threshold = np.percentile(importance_all, rate)
     filter_mask = np.greater(importance_all, threshold)
     return filter_mask
 
@@ -201,7 +201,7 @@ def cal_sparsity(model):
     return total_weights, num_zero, sparsity
 
 
-def train(train_loader, epoch, model, criterion, optimizer, reg=None, prune=None, odecay=0, device='cuda'):
+def train(train_loader, epoch, model, criterion, optimizer, reg=None, prune=None, prune_freq=4, odecay=0, device='cuda'):
     losses = AverageMeter('Loss', ':.4e')
     top1 = AverageMeter('Acc@1', ':6.2f')
     top5 = AverageMeter('Acc@5', ':6.2f')
@@ -213,12 +213,13 @@ def train(train_loader, epoch, model, criterion, optimizer, reg=None, prune=None
         targets = targets.to(device)
         
         if prune:
-            if prune['type'] == 'structured':
-                filter_mask = get_filter_mask(model, prune['rate'])
-                filter_prune(model, filter_mask)
-            elif prune['type'] == 'unstructured':
-                thres = get_weight_threshold(model, prune['target_sparsity'])
-                weight_prune(model, thres)        
+            if (i+1) % prune_freq == 0 and epoch <= 225:
+                if prune['type'] == 'structured':
+                    filter_mask = get_filter_mask(model, prune['rate'])
+                    filter_prune(model, filter_mask)
+                elif prune['type'] == 'unstructured':
+                    thres = get_weight_threshold(model, prune['target_sparsity'])
+                    weight_prune(model, thres)        
             
         outputs = model(inputs)
             
@@ -241,7 +242,7 @@ def train(train_loader, epoch, model, criterion, optimizer, reg=None, prune=None
     print('train {i} ====> Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'.format(i=epoch, top1=top1, top5=top5))
     if prune:
         num_total, num_zero, sparsity = cal_sparsity(model)
-        print('\n====> sparsity: {:.2f}% || num_zero/num_total: {}/{}'.format(sparsity, num_zero, num_total))
+        print('sparsity {i} ====> {:.2f}% || num_zero/num_total: {}/{}'.format(sparsity, num_zero, num_total))
     return top1.avg, top5.avg
 
 

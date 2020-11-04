@@ -25,9 +25,9 @@ from utils import *
 def main():
     ## gpu 및 seed 설정
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
-    torch.manual_seed(123)
+    torch.manual_seed(777)
     if device =='cuda':
-        torch.cuda.manual_seed_all(123)
+        torch.cuda.manual_seed_all(777)
         
     ## args
     layers = 56
