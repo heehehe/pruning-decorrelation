@@ -242,7 +242,7 @@ def train(train_loader, epoch, model, criterion, optimizer, reg=None, prune=None
     print('train {i} ====> Acc@1 {top1.avg:.3f} Acc@5 {top5.avg:.3f}'.format(i=epoch, top1=top1, top5=top5))
     if prune:
         num_total, num_zero, sparsity = cal_sparsity(model)
-        print('sparsity {i} ====> {:.2f}% || num_zero/num_total: {}/{}'.format(sparsity, num_zero, num_total))
+        print('sparsity {} ====> {:.2f}% || num_zero/num_total: {}/{}'.format(epoch, sparsity, num_zero, num_total))
     return top1.avg, top5.avg
 
 
