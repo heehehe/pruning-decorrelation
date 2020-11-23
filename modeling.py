@@ -1,4 +1,3 @@
-import args
 import time
 import random
 import pathlib
@@ -23,7 +22,7 @@ from resnet_mask import *
 from utils import *
 
 
-def main():
+def main(args):
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     torch.manual_seed(777)
     if device =='cuda':
