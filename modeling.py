@@ -29,17 +29,17 @@ def main(args):
         torch.cuda.manual_seed_all(777)
     
     ## args
-    layers     = args.layers
+    layers     = int(args.layers)
     prune_type = args.prune_type
-    prune_rate = args.prune_rate
+    prune_rate = float(args.prune_rate)
     prune_imp  = args.prune_imp
     reg        = args.reg
-    epochs     = args.epochs
-    batch_size = args.batch_size
-    lr         = args.lr
-    momentum   = args.momentum
-    wd         = args.wd
-    odecay     = args.odecay
+    epochs     = int(args.epochs)
+    batch_size = int(args.batch_size)
+    lr         = float(args.lr)
+    momentum   = float(args.momentum)
+    wd         = float(args.wd)
+    odecay     = float(args.odecay)
 
     if prune_type:
         prune = {'type':prune_type, 'rate':prune_rate}
