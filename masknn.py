@@ -21,6 +21,6 @@ class MaskConv2d(nn.Conv2d):
                                      padding, dilation, groups, bias, padding_mode)
         self.mask = Parameter(torch.ones(self.weight.size()), requires_grad=False)
 
-    def forward(self, input):
+    def forward(self, inputs):
         masked_weight = Masker.apply(self.weight, self.mask)
-        return super(MaskConv2d, self)._conv_forward(input, masked_weight)
+        return super(MaskConv2d, self)._conv_forward(inputs, masked_weight)

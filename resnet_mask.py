@@ -1,9 +1,6 @@
-"""ResNet/WideResNet in PyTorch.
-See the paper "Deep Residual Learning for Image Recognition"
-(https://arxiv.org/abs/1512.03385)
-"""
 import torch
 import torch.nn as nn
+import masknn as mnn
 
 
 def conv3x3(in_planes, out_planes, stride=1, groups=1, dilation=1):
