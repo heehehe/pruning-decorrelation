@@ -1,6 +1,6 @@
 ## 상관계수 정규화와 동적 필터 가지치기를 이용한 심층 신경망 압축
 Dynamic Filter Pruning with Decorrelation Regularization for Compression of Deep Neural Network
-* 2020 한국소프트웨어종합학술대회 (KSC2020) 학부생논문 경진대회 출품작
+> 2020 한국소프트웨어종합학술대회 (KSC2020) 학부생논문 경진대회 출품작
 
 ### Prerequisites
 
@@ -36,7 +36,7 @@ L1 norm 크기를 기반으로 필터 마스크를 생성하여 가중치 학습
    - j : 필터 위치
    - t : epoch 값
    - W : 필터 가중치 행렬
-   - η: 임계값 (전체 필터 개수 중 가지치기 필터 개수 비율 통해 계산)
+   - η : 임계값 (전체 필터 개수 중 가지치기 필터 개수 비율 통해 계산)
 - 가중치 학습 : ![image](https://user-images.githubusercontent.com/41580746/102396101-51794d00-401f-11eb-9303-99dd712798ee.png)
    - g : 기울기
    - γ : learning rate
