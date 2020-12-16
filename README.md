@@ -52,6 +52,8 @@ L1 norm 크기를 기반으로 필터 마스크를 생성하여 가중치 학습
 - ![image](https://user-images.githubusercontent.com/41580746/102396706-28a58780-4020-11eb-9ebb-6cc723b4fcbf.png)
 - 기존 동적 필터 가지치기 대비 Accuracy 1.47%, Sparsity 1.08% 증가
 
+---
+
 _References_
 - [1] Yann LeCun, Yoshua Bengio, Geoffrey Hinton. Deep learning. Nature 521, 436-444, 2015.
 - [2] Kaiming He, Xiangyu Zhang, Shaoqing Ren, Jain Sun. Deep Residual Learning for Image Recognition. 2015.
