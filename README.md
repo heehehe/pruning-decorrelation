@@ -1,6 +1,6 @@
 ## 상관계수 정규화와 동적 필터 가지치기를 이용한 심층 신경망 압축
 Dynamic Filter Pruning with Decorrelation Regularization for Compression of Deep Neural Network
-> [2020 한국소프트웨어종합학술대회 (KSC2020)](http://kiise.or.kr/conference/main/index.do?CC=KSC&CS=2020) 학부생논문 경진대회 장려상 수상작 [Link](http://www.kiise.or.kr/academy/board/academyNewsView.fa?MENU_ID=080100&sch_add_bd=%ED%95%99%ED%9A%8C%EC%86%8C%EC%8B%9D&NUM=2127)
+> [2020 한국소프트웨어종합학술대회 (KSC2020)](http://kiise.or.kr/conference/main/index.do?CC=KSC&CS=2020) 학부생논문 경진대회 장려상 수상작 ([Link](http://www.kiise.or.kr/academy/board/academyNewsView.fa?MENU_ID=080100&sch_add_bd=%ED%95%99%ED%9A%8C%EC%86%8C%EC%8B%9D&NUM=2127))
 
 ## Prerequisites
 
